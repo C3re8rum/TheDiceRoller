@@ -1,0 +1,64 @@
+#:include kv/diceroller.kv
+#:include kv/encountertable.kv
+#:include kv/settings.kv
+
+WindowManager:
+	MainMenu:
+		name: "main"
+	DiceRoller:
+		name: "dr"
+	EncounterTable:
+		name: "et"
+	settings:
+		name: "settings"
+
+
+<MainMenu>:
+	id: "main"
+
+	FloatLayout:
+		canvas.before:
+			Rectangle:
+				pos: self.pos
+				size: self.size
+
+		Label:
+			color: 0.545,0,0,1
+			font_size: 15
+			pos_hint: {"right":1, "y":0.48}
+			text: "Welcome to the DMA"
+
+		ImageButton:
+			source: "icons/d20.png"
+			id: drbtn
+			border: 32, 32, 32, 32
+			pos_hint: {"right":1, "top":0.7}
+			size_hint: 0.5,0.3
+			on_release:
+				root.manager.transition.direction = "left"
+				root.manager.current = "dr"
+
+		ImageButton:
+			source: "icons/Compass.png"
+			id: etbtn
+			pos_hint: {"left":1, "top":0.7}
+			text: "Go to the EncounterTable"
+			size_hint: 0.5,0.3
+			outline_color: 0,0,0,1
+			outline_width: [18,18,18,18]
+			on_release:
+				app.root.current = "et"
+				root.manager.transition.direction = "left"
+
+		Button:
+			background_color: 0,0,0,0
+			pos_hint: {"bottom":0.95 }
+			size_hint: 1,0.05
+			text:"Settings"
+			color: 0,0,0,1
+			border: 0, 0, 32, 0
+			on_release:
+				app.root.current = "settings"
+				root.manager.transition.direction = "left"
+
+

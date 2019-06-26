@@ -1,0 +1,72 @@
+#:import Factory kivy.factory.Factory
+
+<MyPopup@Popup>:
+	FloatLayout:
+		Label:
+			size_hint: 0.5, 0.2
+			pos_hint : {"top":0.7, "x":0.25}
+			text: "You roll dice"
+		Button:
+			size_hint: 1,0.1
+			pos_hint: {"bottom":1}
+			text: "Close"
+			on_release: root.dismiss()
+
+<DiceRoller>:
+	id: dr
+
+	diceType: diceType
+	diceNumber: diceNumber
+
+	FloatLayout:
+		canvas.before:
+			Rectangle:
+				pos: self.pos
+				size: self.size
+
+		Button:
+			pos_hint: {"bottom":1}
+			size_hint: 1,0.05
+			text:"Main menu"
+			color: 0,0,0,1
+			on_release:
+				app.root.current = "main"
+				root.manager.transition.direction = "right"
+
+		TextInput:
+			id: diceType
+			input_type: "number"
+			input_filter: "int"
+			font_size: 12
+			hint_text:"What kind of dice do you want(6 for D6)?"
+			pos_hint: {"top":1, "right":0.95}
+			size_hint: 0.5, 0.25
+
+		TextInput:
+			id: diceNumber
+			input_type: "number"
+			input_filter: "int"
+			hint_text: "How many dice do you want to roll?"
+			pos_hint: {"top":0.76, "right": 0.95}
+			size_hint: 0.5,0.25
+
+
+		smoothButton:
+			id: RollDice
+			text: "Roll dice"
+			pos_hint: {"top":0.2, "x":0.1}
+			size_hint: 0.8, 0.1
+			back_color: (0,0,0,0.1)
+			on_release:
+				root.rolldice()
+
+<smoothButton@Button>:
+	background_color: (0,0,0,0)
+	background_normal: ""
+	back_color: (0,0,0,1)
+	border_radius: [24]
+	canvas.before:
+		RoundedRectangle:
+			size: self.size
+			pos: self.pos
+			radius: self.border_radius

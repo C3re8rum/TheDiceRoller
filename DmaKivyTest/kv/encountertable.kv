@@ -1,0 +1,20 @@
+<EncounterTable>:
+	id: "et"
+
+	FloatLayout:
+		canvas.before:
+			Rectangle:
+				pos: self.pos
+				size: self.size
+
+		Button:
+			background_color: 1,1,1,0.05
+			pos_hint: {"bottom":1}
+			size_hint: 1,0.05
+			color: 0,0,0,1
+			text:"Main menu"
+
+			on_release:
+				app.root.current = "main"
+				root.manager.transition.direction = "right"
+
